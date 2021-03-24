@@ -1,23 +1,22 @@
 # Introduction
-hREST, developed by using Python, is a server management command tool based on HTTPs and Redfish/RESTful. It allows users to use commands to obtain server information and configure servers.
+hdm-redfish-script, developed by using Python, is a server management command tool based on HTTPs and Redfish/RESTful. It allows users to use commands to obtain server information and configure servers.
 
 # Command format
-An hREST command uses the python main.py -H host -p port -U username -P password [command] format, where:
+An hdm-redfish-script command uses the python main.py -H host -p port -U username -P password [command] format, where:
 *	-H host—Specifies the HDM IP address of the managed device.
 *	-p port—Specifies the HTTPS port number. By default, the port number is 443. This option is optional.
 *	-U username -P password—Specifies the HDM username and password of the managed device.
 *	[command]—Specifies which action to take on which instance.
 
 # Prerequisites
-*	HDM-1.30.15 or later.Some commands might require specific HDM versions. For more information, see the specific command.|
+*	HDM-1.30.15 or later.Some commands might require specific HDM versions. For more information, see the specific command.
 *	Windows Server 2012 R2、Windows 7、Windows 10、CentOS 6.2、CentOS 7.3
 *	Python 3.7 or later
 
-# Use the hREST command tool
-To use the hREST command tool:
+# Use the command tool
+To use the command tool:
 *	Local operating system configuration python 3 environment.
 *	Copy the tool project file to the operating system. 
-*	Decompress the file and access the hREST_Project directory.
 *	Enter the corresponding command and then press Enter to execute the command.
 
     `python main.py -H host -p port -U username -P password <command>`
