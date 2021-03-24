@@ -9,7 +9,7 @@ An hdm-redfish-script command uses the python main.py -H host -p port -U usernam
 *	[command]—Specifies which action to take on which instance.
 
 # Prerequisites
-*	HDM-1.30.15 or later.Some commands might require specific HDM versions. For more information, see the specific command.
+*	HDM-1.30.15 or later. Some commands might require specific HDM versions. For more information, see the specific command.
 *	Windows Server 2012 R2、Windows 7、Windows 10、CentOS 6.2、CentOS 7.3
 *	Python 3.7 or later
 
