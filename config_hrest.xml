@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration type="hREST" version="1.10" is_adapt_b01="True">
+    <propertys>
+        <property name="-H" dest="host" help="domain name, IPv4 address,or [IPv6 address]" required="True"/>
+        <property name="-p" dest="port" help="port" type="int"/>
+        <property name="-U" dest="username" help="local or LDAP username" required="True"/>
+        <property name="-P" dest="password" help="password" required="True"/>
+    </propertys>
+	<mapper id="addaduser" help="add ad user." file="model/add_ad_user" class="AddAdUser" method="run">
+		<propertys>
+			<property name="-RI" dest="role_id" help="role id.(1-5)" required="True" choices="1 2 3 4 5" type="int"/>
+			<property name="-RGN" dest="role_group_name" help="Role group name." required="True" />
+			<property name="-RGD" dest="role_group_domain" help="Role group domain." required="True" />
+			<property name="-RGP" dest="role_group_privilege" help="role group privilege." required="True" choices="Administrator Operator User CustomRole1 CustomRole2 CustomRole3 CustomRole4 CustomRole5" />
+			<property name="-RGHP" dest="role_group_health_privilege" help="role group health privilege.(1.health permissions 0.no health permissions)" required="False" choice="1 0" type="int"/>
+			<property name="-RGNP" dest="role_group_network_privilege" help="role group network privilege.(1.network permissions 0.no network permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGUP" dest="role_group_user_privilege" help="role group user privilege.(1.user permissions 0.no user permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGBP" dest="role_group_basic_privilege" help="role group basic privilege.(1.basic permissions 0.no basic permissions)" required="False" choices="1 0" type="int" />
+			<property name="-RGRP" dest="role_group_remotectrl_privilege" help="role group remotectrl privilege.(1.remotectrl permissions 0.no remotectrl permissions)" required="False" choices="1 0" type="int" />
+			<property name="-RGKP" dest="role_group_kvm_privilege" help="role group kvm privilege.(1.kvm permissions 0.no kvm permissions)" required="False" choice="1 0" type="int"/>
+			<property name="-RGVP" dest="role_group_vmedia_privilege" help="role group vmedia privilege.(1.vmedia permissions 0.no vmedia permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGPP" dest="role_group_power_privilege" help="role group power privilege.(1.power permissions 0.no power permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGFP" dest="role_group_firmware_privilege" help="role group firmware privilege.(1.firmware permissions 0.no firmware permissions)" required="False" choices="1 0" type="int" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="addldapuser" help="add ldap user." file="model/add_ldap_user" class="AddLdapUser" method="run">
+		<propertys>
+			<property name="-RI" dest="role_id" help="role id.(1-5)" required="True" choices="1 2 3 4 5" type="int"/>
+			<property name="-RGN" dest="role_group_name" help="Role group name." required="True" />
+			<property name="-RGD" dest="role_group_domain" help="Role group domain." required="True" />
+			<property name="-RGP" dest="role_group_privilege"
+					  help="role group privilege." required="True" choices="Administrator Operator User CustomRole1 CustomRole2 CustomRole3 CustomRole4 CustomRole5" />
+			<property name="-RGHP" dest="role_group_health_privilege" help="role group health privilege.(1.health permissions 0.no health permissions)" required="False" choice="1 0" type="int"/>
+			<property name="-RGNP" dest="role_group_network_privilege" help="role group network privilege.(1.network permissions 0.no network permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGUP" dest="role_group_user_privilege" help="role group user privilege.(1.user permissions 0.no user permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGBP" dest="role_group_basic_privilege" help="role group basic privilege.(1.basic permissions 0.no basic permissions)" required="False" choices="1 0" type="int" />
+			<property name="-RGRP" dest="role_group_remotectrl_privilege" help="role group remotectrl privilege.(1.remotectrl permissions 0.no remotectrl permissions)" required="False" choices="1 0" type="int" />
+			<property name="-RGKP" dest="role_group_kvm_privilege" help="role group kvm privilege.(1.kvm permissions 0.no kvm permissions)" required="False" choice="1 0" type="int"/>
+			<property name="-RGVP" dest="role_group_vmedia_privilege" help="role group vmedia privilege.(1.vmedia permissions 0.no vmedia permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGPP" dest="role_group_power_privilege" help="role group power privilege.(1.power permissions 0.no power permissions)" required="False" choices="1 0" type="int"/>
+			<property name="-RGFP" dest="role_group_firmware_privilege" help="role group firmware privilege.(1.firmware permissions 0.no firmware permissions)" required="False" choices="1 0" type="int" />
+			<property name="-RGOP" dest="role_group_withoem_privilege" help="role group withoem privilege." required="False" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="addldisk" help="create logical disk." file="model/add_logical_disk" class="AddLDisk" method="run">
+		<propertys>
+			<property name="-CI" dest="controller_id" help="controller id" required="True"/>
+			<property name="-N" dest="volume_name" help="volume_name" required="False"/>
+			<property name="-OV" dest="opt_size_bytes" help="opt size byte" required="False" choices="16 32 64 128 256 512 1024"/>
+			<property name="-M" dest="initialization_mode" help="initialization mode" required="False" choices="No Fast Full"/>
+			<property name="-VL" dest="volume_raid_level" help="volume raid level" required="False" choices="RAID0 RAID1 RAID5 RAID6 RAID00 RAID10 RAID50 RAID60"/>
+			<property name="-CNI" dest="drives_id" help="drives, for example:[0:0_1:0_2:1_2:2]" required="True"/>
+			<property name="-SN" dest="span_number" help="span number" required="True" type="int"/>
+			<property name="-RP" dest="read_policy" help="read policy" required="False" choices="NoReadAhead ReadAhead"/>
+			<property name="-WP" dest="write_policy" help="write policy" required="False" choices="WriteThrough WriteBack AlwaysWriteBack"/>
+			<property name="-IP" dest="io_policy" help="io policy" required="False" choices="Direct Cached"/>
+			<property name="-DCP" dest="drive_cache_policy" help="drive_cache_policy" required="False" choices="Unchanged Enabled Disabled"/>
+			<property name="-AP" dest="access_policy" help="access policy" required="False" choices="ReadWrite ReadOnly Blocked"/>
+			<property name="-V" dest="capacity_bytes" help="capacity bytes" required="False" type="float"/>
+			<property name="-SU" dest="size_unit" help="size unit" required="False" choices="MB GB TB"/>
+			<property name="-AM" dest="acceleration_method" help="acceleration_method,use for PMC, 1 for None, 2 for Controller Cache" required="False" type="int" choices="1 2 3"/>
+        </propertys>
+        <result>
+        </result>
+	</mapper>
+	<mapper id="adduser" help="add user." file="model/add_user" class="AddUser" method="run">
+		<propertys>
+			<property name="-EN" dest="enabled" help="enable status" required="False" choices="Enable Disable" />
+			<property name="-N" dest="new_user_name" help="new user name" required="True"/>
+			<property name="-P" dest="new_pwd" help="new user password" required="True"/>
+			<property name="-R" dest="role_id" help="new user role" required="True" choices="Administrator Operator User None CustomRole1 CustomRole2 CustomRole3 CustomRole4 CustomRole5"/>
+			<property name="-VME" dest="vmedia_enable" help="virtual media enable status" required="False" choices="Enable Disable"/>
+			<property name="-KVM" dest="kvm_enable" help="kvm enable status" required="False" choices="Enable Disable"/>
+			<property name="-IPMI" dest="ipmi_enable" help="ipmi enable status" required="False" choices="Enable Disable"/>
+			<property name="-WEB" dest="web_enable" help="web enable status" required="False" choices="Enable Disable"/>
+			<property name="-V3" dest="snmp_v3_enable" help="snmpV3 enable status" required="False" choices="Enable Disable"/>
+			<property name="-V3APE" dest="snmp_v3_access_permission" help="SnmpV3 Access Permission" required="False" choices="read_only read_write"/>
+			<property name="-V3APR" dest="snmp_v3_auth_protocol" help="SnmpV3 Auth Protocol" required="False" choices="sha md5"/>
+			<property name="-V3PP" dest="snmp_v3_priv_protocol" help="SnmpV3 PrivProtocol" required="False" choices="des aes"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="delelog" help="delete event log." file="model/clear_event_log" class="DelEventLog" method="run">
+        <result>
+		</result>
+	</mapper>
+	<mapper id="getsdslog" help="get sds log." file="model/collect" class="Collect" method="run">
+		<propertys>
+			<property name="-Q" dest="end_date" help="end date, exp:xxxx-xx-xx" required="False"/>
+			<property name="-P" dest="start_date" help="start date, exp:xxxx-xx-xx" required="False"/>
+			<property name="-F" dest="file_name" help="file name" required="True"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="deladuser" help="delete ad user." file="model/delete_ad_user" class="DelAdUser" method="run">
+		<propertys>
+			<property name="-RI" dest="role_id" help="role id.(1-5)" required="True" choices="1 2 3 4 5" type="int"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="delldapuser" help="delete ldap user." file="model/delete_ldap_user" class="DelLdapUser" method="run">
+		<propertys>
+			<property name="-RI" dest="role_id" help="role id.(1-5)" required="True" choices="1 2 3 4 5" type="int"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="delldisk" help="delete logical disk." file="model/delete_logical_disk" class="DelLDisk" method="run">
+		<propertys>
+			<property name="-CI" dest="controller_id" help="controller id" required="True" type="int"/>
+			<property name="-LI" dest="logical_id" help="logical disk id" required="True" type="int"/>
+        </propertys>
+        <result>
+        </result>
+	</mapper>
+	<mapper id="deluser" help="delete user by username." file="model/delete_user" class="DelUser" method="run">
+		<propertys>
+			<property name="-N" dest="name" help="user name" required="True"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="downloadconfig" help="download configuration." file="model/download_config" class="DownloadCfg" method="run">
+		<propertys>
+			<property name="-T" dest="config_type" help="configuration type" required="True" choices="BIOS BMC RAID"/>
+			<property name="-F" dest="file_uri" help="configuration file path" required="True"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="fwupdate" help="fwupdate command." file="model/fwupdate" class="Fwupdate" method="run">
+		<propertys>
+			<property name="-E" dest="activate_mode" help="activate mode" required="False" choices="Auto Manual"/>
+			<property name="-T" dest="firmware_type" help="firmware type" required="True" choices="BMC BIOS CPLD"/>
+			<property name="-U" dest="image_uri" help="image uri" required="True"/>
+			<property name="-O" dest="is_override" help="override" required="False" type="int" choices="0 1"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="getbios" help="get BIOS information." file="model/get_bios" class="GetBios" method="run">
+		<propertys>
+			<property name="-A" dest="attribute" help="Attribute name" required="False" />
+        </propertys>
+        <result raw="True">
+		</result>
+	</mapper>
+	<mapper id="getcpu" help="get CPUs information." file="model/get_cpu" class="GetCpu" method="run">
+		<propertys>
+            <property name="-CI" dest="cpu_id" help="cpu id" required="False"/>
+        </propertys>
+        <result>
+			<li/>
+            <list reference="CPUS" status="cpu_state" value="exist">
+                <property name="Id" reference="Id"/>
+				<property name="Name" reference="Name"/>
+				<property name="FrequencyMHz" reference="FrequencyMHz"/>
+				<property name="L1CacheKiB" reference="L1CacheKiB"/>
+				<property name="L2CacheKiB" reference="L2CacheKiB"/>
+				<property name="L3CacheKiB" reference="L3CacheKiB"/>
+				<property name="Temperature" reference="Temperature"/>
+				<property name="ProcessorType" reference="ProcessorType"/>
+				<property name="ProcessorArchitecture" reference="ProcessorArchitecture"/>
+				<property name="InstructionSet" reference="InstructionSet"/>
+				<property name="Manufacturer" reference="Manufacturer"/>
+				<property name="Model" reference="Model"/>
+				<property name="MaxSpeedMHz" reference="MaxSpeedMHz"/>
+				<property name="TotalCores" reference="TotalCores"/>
+				<property name="TotalThreads" reference="TotalThreads"/>
+				<property name="Socket" reference="Socket"/>
+				<bl/>
+				<tag name = "[Status]">	
+					<property name="Health" reference="Health"/>
+					<property name="State" reference="State"/>
+				</tag>
+				<bl/>
+				<tag name = "[ProcessorId]">
+					<property name="IdentificationRegisters" reference="IdentificationRegisters"/>
+				</tag>
+                <li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getelog" help="get event log." file="model/get_event_log" class="GetEventLog" method="run">
+		<propertys>
+            <property name="-C" dest="count" help="log count" required="False" type="int"/>
+        </propertys>
+		<result>
+			<li/>
+			<list reference="event_logs">
+				<property name="Id" reference="id"/>
+				<property name="Record type" reference="record_type"/>
+				<property name="Time" reference="time"/>
+				<property name="System software type" reference="system_software_type"/>
+				<property name="Generator type" reference="generator_type"/>
+				<property name="Channel number" reference="channel_number"/>
+				<property name="Ipmb lun" reference="ipmb_lun"/>
+				<property name="Event format ipmi version" reference="event_format_ipmi_version"/>
+				<property name="Sensor type" reference="sensor_type"/>
+				<property name="Type number" reference="type_number"/>
+				<property name="Sensor number" reference="sensor_number"/>
+				<property name="Sensor name" reference="sensor_name"/>
+				<property name="Event direction" reference="event_direction"/>
+				<property name="Event reading class" reference="event_reading_class"/>
+				<property name="Sensor reading value" reference="sensor_reading_value"/>
+				<property name="Triggered value" reference="triggered_value"/>
+				<property name="Sensor reading value type" reference="sensor_reading_value_type"/>
+				<property name="Triggered type" reference="triggered_type"/>
+				<property name="Event description" reference="event_description"/>
+				<property name="Level" reference="level"/>
+				<li/>
+			</list>
+        </result>
+	</mapper>
+	<mapper id="geteventsub" help="get event subscription information." file="model/get_event_sub" class="GetEventSub" method="run">
+        <result>
+			<li/>
+			<list reference="Subscriber">
+               <property name="Id" reference="Id"/>
+				<property name="Destination" reference="Destination"/>
+				<property name="EventTypes" reference="EventTypes"/>
+				<property name="HttpHeaders" reference="HttpHeaders"/>
+				<property name="Protocol" reference="Protocol"/>
+				<property name="Context" reference="Context"/>
+				<property name="MessageIds" reference="MessageIds"/>
+				<property name="OriginResources" reference="OriginResources"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getfwv" help="get firmware version." file="model/get_firmware_version" class="GetFirmware" method="run">
+        <result>
+			<li/>
+			<list reference="Firmware">
+				<property name="Name" reference="Name"/>
+				<property name="Version" reference="Version"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getgpu" help="get GPUs information." file="model/get_gpu" class="GetGPU" method="run">
+         <result>
+			<li/>
+            <list reference="GPU">
+                <property name="ID" reference="ID"/>
+				<property name="Name" reference="Name"/>
+				<property name="SlotNum" reference="SlotNum"/>
+				<property name="Manufacturer" reference="Manufacturer"/>
+				<property name="Model" reference="Model"/>
+				<property name="SerialNumber" reference="SerialNumber"/>
+				<property name="PartNumber" reference="PartNumber"/>
+				<property name="FirmwareVersion" reference="FirmwareVersion"/>
+				<property name="PowerConsumedWatts" reference="PowerConsumedWatts"/>
+				<property name="TemperatureCelsius" reference="TemperatureCelsius"/>
+				<bl/>
+				<tag name = "[Status]">
+					<property name="Health" reference="Health"/>
+					<property name="State" reference="State"/>
+				</tag>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="gethdmlog" help="get hdm log." file="model/get_hdm_log" class="GetHdmLog" method="run">
+		<propertys>
+			<property name="-C" dest="count" help="log count" type="int" required="False"/>
+		</propertys>
+        <result>
+			<li/>
+			<list reference="HdmLog">
+				<property name="Id" reference="Id"/>
+				<property name="UserName" reference="UserName"/>
+				<property name="Interface" reference="Interface"/>
+				<property name="LogIpAdd" reference="LogIpAdd"/>
+				<property name="LogType" reference="LogType"/>
+				<property name="LogContent" reference="LogContent"/>
+				<property name="Timestamp" reference="Timestamp"/>
+				<property name="HostName" reference="HostName"/>
+				<property name="LogLevel" reference="LogLevel"/>
+			<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getsyshealth" help="get system health state." file="model/get_health" class="GetHealth" method="run">
+		<result>
+			<li/>
+			<property name="System health" reference="health"/>
+			<property name="Temperature" reference="temperature"/>
+			<property name="Voltage" reference="voltage"/>
+			<property name="Current" reference="current"/>
+			<property name="Memory" reference="memory"/>
+			<property name="Fans" reference="fans"/>
+			<property name="Processor" reference="processor"/>
+			<property name="Disk" reference="disk"/>
+			<property name="Power" reference="power"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getip" help="get ip information." file="model/get_ip" class="GetIp" method="run">
+		<propertys>
+            <property name="-NI" dest="network_port_id" help="network port id" required="False" />
+        </propertys>
+		<result>
+			<li/>
+			<property name="Id" reference="Id"/>
+			<property name="Name" reference="Name"/>
+			<property name="Description" reference="Description"/>
+			<property name="AutoNeg" reference="AutoNeg"/>
+			<property name="FQDN" reference="FQDN"/>
+			<property name="FullDuplex" reference="FullDuplex"/>
+			<property name="HostName" reference="HostName"/>
+			<property name="MACAddress" reference="MACAddress"/>
+			<property name="IPv6DefaultGateway" reference="IPv6DefaultGateway"/>
+			<property name="InterfaceEnabled" reference="InterfaceEnabled"/>
+			<property name="MTUSize" reference="MTUSize"/>
+			<property name="MaxIPv6StaticAddresses" reference="MaxIPv6StaticAddresses"/>
+			<property name="NameServers" reference="NameServers"/>
+			<property name="PermanentMACAddress" reference="PermanentMACAddress"/>
+			<property name="SpeedMbps" reference="SpeedMbps"/>
+			<bl/>
+			<tag name="[Status]">
+				<property name="Health" reference="Health"/>
+				<property name="Status" reference="State"/>
+			</tag>
+			<bl/>
+			<list name="[IPv4Addresses]" reference="IPv4Addresses">
+				<li/>
+				<property name="SubnetMask" reference="SubnetMask"/>
+				<property name="AddressOrigin" reference="AddressOrigin"/>
+				<property name="Address" reference="Address"/>
+			</list>
+			<bl/>
+			<list name="[IPv6Addresses]" reference="IPv6Addresses">
+				<li/>
+				<property name="Address" reference="Address"/>
+				<property name="AddressOrigin" reference="AddressOrigin"/>
+				<property name="PrefixLength" reference="PrefixLength"/>
+			</list>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getvlan" help="get vlan information." file="model/get_ip" class="GetIp" method="run">
+		<propertys>
+            <property name="-N" dest="network_port_id" help="network port id" required="True" />
+        </propertys>
+		<result>
+			<li/>
+			<property name="VLANEnable" reference="VLANEnable"/>
+			<property name="VLANId" reference="VLANId"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getldisk" help="get logical drive information." file="model/get_logical_disk" class="GetLDisk" method="run">
+		<propertys>
+            <property name="-LI" dest="logical_id" help="logical drive id" required="False" type = "int"/>
+			<property name="-CI" dest="controller_id" help="controller id" required="False" type = "int"/>
+        </propertys>
+        <result>
+			<li/>
+            <list reference="Logics">
+				<property name="RaidControllerID" reference="RaidControllerID"/>
+				<property name="Logical Drive Id" reference="LogicalId"/>
+				<property name="LogicDiskName" reference="Name"/>
+				<property name="CapacityGiB" reference="CapacityGiB"/>
+				<property name="RaidLevel" reference="VolumeRaidLevel"/>
+				<property name="OptimumIOSizeBytes" reference="OptimumIOSizeBytes"/>
+				<property name="DriveCache" reference="DriveCache"/>
+				<property name="CurrentReadPolicy" reference="ReadPolicy"/>
+				<property name="CurrentWritePolicy" reference="WritePolicy"/>
+				<property name="CurrentIOPolicy" reference="IOPolicy"/>
+				<property name="BootEnable" reference="BootEnable"/>
+				<property name="Drives" reference="Drives"/>
+				<property name="Health" reference="Health"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getloginruleip" help="get ip login rule." file="model/get_login_rule_ip" class="GetLoginRuleIp" method="run">
+        <result>
+			<li/>
+			<list reference="RuleIp">
+				<property name="IpFrom" reference="IpFrom"/>
+				<property name="IpTo" reference="IpTo"/>
+				<property name="MacAddress" reference="MacAddress"/>
+				<property name="Rule" reference="Rule"/>
+				<property name="TimeRange" reference="TimeRange"/>
+				<property name="TimeFrom" reference="TimeFrom"/>
+				<property name="TimeTo" reference="TimeTo"/>
+			<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getmemory" help="get memory information." file="model/get_memory" class="GetMemory" method="run">
+		<propertys>
+            <property name="-MI" dest="memory_id" help="memory id" required="False"/>
+        </propertys>
+        <result>
+			<li/>
+            <list reference="Memorys" status="memory_state" value="exist">
+                <property name="CommonName" reference="CommonName"/>
+				<property name="CapacityMiB" reference="CapacityMiB"/>
+				<property name="Manufacturer" reference="Manufacturer"/>
+				<property name="OperatingSpeedMhz" reference="OperatingSpeedMhz"/>
+				<property name="MemoryDeviceType" reference="MemoryDeviceType"/>
+				<property name="RankCount" reference="RankCount"/>
+				<property name="PartNumber" reference="PartNumber"/>
+				<bl/>
+				<tag name="[MemoryLocation]">
+					<property name="Position" reference="Position"/>
+					<property name="Channel" reference="Channel"/>
+					<property name="Slot" reference="Slot"/>
+				</tag>
+				<bl/>
+				<tag name = "[Status]">
+					<property name="State" reference="State"/>
+					<property name="Health" reference="Health"/>
+				</tag>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getnetmode" help="get net mode." file="model/get_net_mode" class="GetNetMode" method="run">
+        <result>
+			<li/>
+			<property name="PortModes" reference="NetPortMode"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getmac" help="get mac information." file="model/get_nic" class="GetNic" method="run">
+		<result>
+			<li/>
+			<list reference="nics">
+				<property name="Product name" reference="product_name"/>
+				<property name="Product code" reference="device_type"/>
+				<property name="Network port" reference="network_port"/>
+				<property name="Location" reference="embedded"/>
+				<property name="Mac address" reference="mac_address"/>
+				<property name="Speed" reference="speed"/>
+				<li/>
+			</list>
+        </result>
+	</mapper>
+	<mapper id="getntp" help="get ntp information." file="model/get_ntp" class="GetNtp" method="run">
+        <result>
+			<li/>
+			<property name="ServiceEnabled" reference="ServiceEnabled"/>
+			<property name="TimeZone" reference="TimeZone"/>
+			<property name="PreferredNtpServer" reference="PreferredNtpServer"/>
+			<property name="AlternateNtpServer" reference="AlternateNtpServer"/>
+			<property name="TertiaryNtpServer" reference="TertiaryNtpServer"/>
+			<property name="NtpAddressOrigin" reference="NtpAddressOrigin"/>
+			<li/>
+		</result>
+	</mapper>
+	<mapper id="getnvmessd" help="get nvme ssd information." file="model/get_nvme_ssd" class="GetNVMeSSD" method="run">
+        <result>
+			<li/>
+			<list reference="NVMeDevice">
+				<property name="SlotID" reference="SlotID"/>
+				<property name="VendorName" reference="VendorName"/>
+				<property name="ProductName" reference="ProductName"/>
+				<property name="PDStatus" reference="PDStatus"/>
+				<property name="PercentLife" reference="PercentLife"/>
+				<property name="SerialNumber" reference="SerialNumber"/>
+				<property name="ModelNumber" reference="ModelNumber"/>
+				<property name="Capacity" reference="Capacity"/>
+				<property name="FirmwareVersion" reference="FirmwareVersion"/>
+				<property name="PortType" reference="PortType"/>
+			<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getpcie" help="get pcie information." file="model/get_pcie" class="GetPCIe" method="run">
+        <result>
+			<li/>
+			<list reference="PCIeDevice" flag="IS_ABSENT" status="Status" value="Enabled">
+				<property name="Location" reference="Location"/>
+				<property name="ProductName" reference="ProductName"/>
+				<property name="VendorID" reference="VendorID"/>
+				<property name="VendorName" reference="VendorName"/>
+				<property name="SerialNumber" reference="SerialNumber"/>
+				<property name="ProductID" reference="ProductID"/>
+				<property name="NegotiatedSpeed" reference="NegotiatedSpeed"/>
+				<property name="NegotiatedProtocol" reference="NegotiatedProtocol"/>
+				<property name="NegotiatedLinkWidth" reference="NegotiatedLinkWidth"/>
+				<property name="MaxSpeed" reference="MaxSpeed"/>
+				<property name="MaxProtocol" reference="MaxProtocol"/>
+				<property name="PartNumber" reference="PartNumber"/>
+				<property name="MaxLinkWidth" reference="MaxLinkWidth"/>
+				<tag name="[Status]"/>
+				<property name="Status" reference="Status"/>
+				<property name="Health" reference="Health"/>
+			<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getpdisk" help="get physical disk information." file="model/get_physical_disk" class="GetPDisk" method="run">
+		<propertys>
+            <property name="-PI" dest="physical_id" help="physical connection id" required="False" type = "int"/>
+        </propertys>
+        <result>
+			<li/>
+            <list reference="Physicals">
+                <property name="Panel" reference="PanelLocation"/>
+				<property name="Slot_phys_no" reference="SlotPhysNo"/>
+				<property name="Slot" reference="Panel"/>
+				<property name="Connection id" reference="ConnectionID"/>
+				<property name="Drive number in BIOS" reference="DriveNumberInBios"/>
+				<property name="Drive number in OS" reference="DriveNumberInOS"/>
+				<property name="Status" reference="FirmwareStatus"/>
+				<property name="Model" reference="ManufacturerModel"/>
+				<property name="Firmware version" reference="Revision"/>
+				<property name="Serial number" reference="SerialNumber"/>
+				<property name="Property" reference="Property"/>
+				<property name="Capacity" reference="CapacityTiB"/>
+				<property name="PredictedMediaLifeLeftPercent" reference="PredictedMediaLifeLeftPercent"/>
+				<bl/>
+				<property name="ControllerID" reference="RaidControllerID"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getpowerlimit" help="get power limit." file="model/get_power_limit" class="GetPowerLimit" method="run">
+		<result>
+			<li/>
+			<property name="PowerLimitEnable" reference="PowerLimitEnable"/>
+			<property name="LimitInWatts" reference="LimitInWatts"/>
+			<property name="LimitException" reference="LimitException"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getproductinfo" help="get product information." file="model/get_product" class="GetProduct" method="run">
+		<result>
+			<li/>
+			<property name="Id" reference="Id"/>
+			<property name="Name" reference="Name"/>
+			<property name="AssetTag" reference="AssetTag"/>
+			<property name="Manufacturer" reference="Manufacturer"/>
+			<property name="Model" reference="Model"/>
+			<property name="IndicatorLED" reference="IndicatorLED"/>
+			<property name="SerialNumber" reference="SerialNumber"/>
+			<property name="PartNumber" reference="PartNumber"/>
+			<property name="PowerState" reference="PowerState"/>
+			<property name="SystemType" reference="SystemType"/>
+			<property name="BiosVersion" reference="BiosVersion"/>
+			<bl/>
+			<tag name="[Status]" reference="Status">
+				<property name="Health" reference="Health"/>
+				<property name="HealthRollup" reference="HealthRollup"/>
+				<property name="State" reference="State"/>
+			</tag>
+			<bl/>
+			<raw name="[Healthstate]" reference="Healthstate">
+			</raw>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getpsu" help="get power information." file="model/get_psu" class="GetPSU" method="run">
+		<result>
+			<li/>
+			<list reference="PSUS" status="psu_state" value="exist">
+				<property name="Name" reference="Name"/>
+				<property name="Model" reference="Model"/>
+				<property name="SerialNumber" reference="SerialNumber"/>
+				<property name="PowerSupplyType" reference="PowerSupplyType"/>
+				<property name="PowerCapacityWatts" reference="PowerCapacityWatts"/>
+				<property name="LineInputVoltageType" reference="LineInputVoltageType"/>
+				<property name="FirmwareVersion" reference="FirmwareVersion"/>
+				<property name="PowerID" reference="PowerID"/>
+				<property name="SlotNumber" reference="SlotNumber"/>
+				<property name="ActiveStandby" reference="ActiveStandby"/>
+				<bl/>
+				<tag name="[Status]"/>
+				<property name="Health" reference="Health"/>
+				<property name="State" reference="State"/>
+				<li/>
+			</list>
+        </result>
+	</mapper>
+	<mapper id="getraid" help="get raid information." file="model/get_raid" class="GetRaid" method="run">
+        <result>
+			<li/>
+            <list reference="Raids">
+				<property name="CommonName" reference="Name"/>
+				<property name="SerialNumber" reference="SerialNumber"/>
+                <property name="State" reference="State"/>
+				<property name="Health" reference="Health"/>
+				<list name="Controller" reference="Controller" indent="4">
+					<property name="Id" reference="MemberId"/>
+					<property name="Manufacturer" reference="Manufacturer"/>
+					<property name="Model" reference="Model"/>
+					<property name="SupportedDeviceProtocols" reference="SupportedDeviceProtocols"/>
+					<property name="SASAddress" reference="SASAddress"/>
+					<property name="FirmwareVersion" reference="FirmwareVersion"/>
+					<property name="PackageVersion" reference="PackageVersion"/>
+					<property name="JBODState" reference="JBODState"/>
+					<property name="MemorySizeMiB" reference="MemorySizeMiB"/>
+					<property name="SupportedRAIDLevels" reference="SupportedRAIDLevels"/>
+					<tag name = "[CapacitanceStatus]">
+						<property name="State" reference="CapacitanceState"/>
+						<property name="Health" reference="CapacitanceHealth"/>
+					</tag>
+					<li/>
+				</list>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getrole" help="get role information." file="model/get_role" class="GetRole" method="run">
+		<propertys>
+            <property name="-R" dest="role" help="role id" required="False" />
+        </propertys>
+        <result>
+			<li/>
+            <list reference="Roles">
+                <property name="Role" reference="Id"/>
+                <property name="IsPredefined" reference="IsPredefined"/>
+                <property name="AssignedPrivileges" reference="AssignedPrivileges"/>
+				<property name="OemPrivileges" reference="OemPrivileges"/>
+                <li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getscreencapture" help="get virtual media information." file="model/get_screen_capture" class="GetScreenCapture" method="run">
+		<propertys>
+			<property name="-F" dest="file_path" help="file path" required="True" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="getsensor" help="get sensors information." file="model/get_sensor" class="GetSensor" method="run">
+        <result>
+			<li/>
+            <list reference="Sensor">
+                <property name="SensorNumber" reference="SensorNumber"/>
+				<property name="SensorName" reference="SensorName"/>
+				<property name="SensorType" reference="SensorType"/>
+				<property name="Reading" reference="Reading"/>
+				<property name="Unit" reference="Unit"/>
+				<property name="Status" reference="Status"/>
+				<property name="unr" reference="unr"/>
+				<property name="uc" reference="uc"/>
+				<property name="unc" reference="unc"/>
+				<property name="lnc" reference="lnc"/>
+				<property name="lc" reference="lc"/>
+				<property name="lnr" reference="lnr"/>
+                <li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getservice" help="get service information." file="model/get_service" class="GetService" method="run">
+		<propertys>
+			<property name="-T" dest="service_type" help="service configuration type" required="False" choices="Web KVM CD-Media FD-Media HD-Media SSH Telnet IPMI SNMP VNC Remote_XDP"/>
+        </propertys>
+        <result>
+		<li/>
+			<list reference="Service">
+				<property name="Name" reference="Name"/>
+				<property name="Status" reference="Enabled"/>
+				<property name="Insecure service port" reference="NonSecurePort"/>
+				<property name="Secure service port " reference="SecurePort"/>
+				<property name="Idle timeout" reference="Timeout"/>
+				<property name="Maximum sessions" reference="MaximumSessions"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getsnmp" help="get snmp information." file="model/get_snmp" class="GetSnmp" method="run">
+		<result>
+			<li/>
+			<property name="Description" reference="Description"/>
+			<property name="Id" reference="Id"/>
+			<property name="LongPasswordEnabled" reference="LongPasswordEnabled"/>
+			<property name="Name" reference="Name"/>
+			<property name="ReadOnlyCommunity" reference="ReadOnlyCommunity"/>
+			<property name="ReadWriteCommunity" reference="ReadWriteCommunity"/>
+			<bl/>
+			<tag name="SnmpTrapNotification" indent="4">
+				<property name="AlarmSeverity" reference="AlarmSeverity"/>
+				<property name="CommunityName" reference="CommunityName"/>
+				<property name="ServiceEnabled" reference="ServiceEnabled"/>
+				<property name="TrapMode" reference="TrapMode"/>
+				<bl/>
+				<list name="TrapServer" reference="TrapServers" indent="4">
+					<property name="Enabled" reference="Enabled"/>
+					<property name="MemberId" reference="MemberId"/>
+					<property name="TrapServerAddress" reference="TrapServerAddress"/>
+					<property name="TrapServerPort" reference="TrapServerPort"/>
+					<li/>
+				</list>
+				<property name="TrapServerIdentity" reference="TrapServerIdentity"/>
+				<property name="TrapV3User" reference="TrapV3User"/>
+				<property name="TrapVersion" reference="TrapVersion"/>
+			</tag>
+			<property name="SnmpV1Enabled" reference="SnmpV1Enabled"/>
+			<property name="SnmpV2CEnabled" reference="SnmpV2CEnabled"/>
+			<property name="SnmpV3AuthProtocol" reference="SnmpV3AuthProtocol"/>
+			<property name="SnmpV3Enabled" reference="SnmpV3Enabled"/>
+			<property name="SnmpV3PrivProtocol" reference="SnmpV3PrivProtocol"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getstorage" help="get storage information." file="model/get_storage" class="GetStorage" method="run">
+		<propertys>
+			<property name="-CI" dest="controller_id" help="controller id" required="False" type = "int"/>
+        </propertys>
+        <result>
+			<li/>
+            <list reference="ctrls">
+				<property name="Ctrl_id" reference="ctrl_id"/>
+                <property name="Raid card model" reference="type"/>
+				<property name="Firmware version" reference="firmware_ver"/>
+				<property name="Serial number" reference="serial"/>
+				<property name="DDR size" reference="ddr_size"/>
+				<property name="Flash" reference="subsys_stat"/>
+				<property name="Supercapacitor" reference="cap_stat"/>
+				<property name="Charging status" reference="cap_perc"/>
+				<property name="Support RAID Level" reference="raid_level"/>
+				<bl/>
+				<list name="Volumes" reference="logical_info" indent="4">
+					<property name="Id" reference="dev_no"/>
+					<property name="Status" reference="status"/>
+					<property name="Level" reference="type"/>
+					<property name="Capacity" reference="capacity"/>
+					<property name="Element" reference="element_num"/>
+					<property name="Drives" reference="drives"/>
+					<li/>
+				</list>
+				<property name="Drives" reference="drives"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="getsysboot" help="get system boot information." file="model/get_sys_boot" class="GetSysBoot" method="run">
+		<result>
+			<li/>
+			<property name="BootSourceOverrideTarget" reference="BootSourceOverrideTarget"/>
+			<property name="BootSourceOverrideEnabled" reference="BootSourceOverrideEnabled"/>
+			<property name="BootSourceOverrideMode" reference="BootSourceOverrideMode"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="gettemp" help="get temperature information." file="model/get_temperature" class="GetTemperature" method="run">
+		<result>
+			<li/>
+			<list reference="Temperatures">
+				<property name="Name" reference="Name"/>
+				<property name="SensorNumber" reference="SensorNumber"/>
+				<property name="ReadingCelsius" reference="ReadingCelsius"/>
+				<property name="PhysicalContext" reference="PhysicalContext"/>
+				<property name="LowerThresholdCritical" reference="LowerThresholdCritical"/>
+				<property name="UpperThresholdCritical" reference="UpperThresholdCritical"/>
+				<property name="LowerThresholdFatal" reference="LowerThresholdFatal"/>
+				<property name="UpperThresholdFatal" reference="UpperThresholdFatal"/>
+				<property name="LowerThresholdNonCritical" reference="LowerThresholdNonCritical"/>
+				<property name="UpperThresholdNonCritical" reference="UpperThresholdNonCritical"/>
+				<bl/>
+				<tag name="[Status]"/>
+				<property name="Health" reference="Health"/>
+				<property name="State" reference="State"/>
+				<li/>
+			</list>
+        </result>
+	</mapper>
+	<mapper id="getthreshold" help="get predictive failure threshold." file="model/get_threshold" class="GetThreshold" method="run">
+		<result >
+			<li/>
+			<property name="ReservedBlock" reference="ReservedBlock"/>
+			<property name="RemainLifePercents" reference="RemainLifePercents"/>
+			<property name="PrefailCount" reference="PrefailCount"/>
+			<property name="MediaError" reference="MediaError"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="gettime" help="get system time." file="model/get_time" class="GetTime" method="run">
+		<result>
+			<li/>
+			<property name="DateTime" reference="DateTime"/>
+			<li/>
+        </result>
+	</mapper>
+	<mapper id="getuser" help="get user information." file="model/get_user" class="GetUser" method="run">
+		<propertys>
+			<property name="-N" dest="name" help="user name" required="False"/>
+		</propertys>
+		<result>
+			<li/>
+			<list reference="Users">
+				<property name="Id" reference="Id"/>
+				<property name="UserName" reference="UserName"/>
+				<property name="RoleId" reference="RoleId"/>
+				<property name="Enable" reference="Enabled"/>
+				<raw reference="extended_privilege"/>
+				<li/>
+			</list>
+        </result>
+	</mapper>
+	<mapper id="getvmm" help="get virtual media information." file="model/get_virtual_media" class="GetVmm" method="run">
+		<propertys>
+			<property name="-T" dest="type" help="virtual media type" required="True" choices="CD HD"/>
+        </propertys>
+        <result>
+			<li/>
+			<raw reference="connect_none"/>
+			<tag name="[Connectd]" reference="connect_tag"/>
+			<list reference="connects" indent="4">
+				<property name="MediaIndex" reference="MediaIndex"/>
+				<property name="ImageName" reference="ImageName"/>
+				<property name="MediaTypes" reference="MediaTypes"/>
+				<li/>
+			</list>
+			<raw reference="not_connect_none"/>
+			<tag name="[NotConnectd]" reference="not_connect_tag"/>
+			<list reference="not_connects" indent="4">
+				<property name="ID" reference="ID"/>
+				<property name="ImageName" reference="ImageName"/>
+				<property name="MediaTypes" reference="MediaTypes"/>
+				<li/>
+			</list>
+			<li/>
+		</result>
+	</mapper>
+	<mapper id="getvncsession" help="get vnc session info." file="model/get_vnc_session" class="GetVncSession" method="run">
+        <result>
+			<li/>
+			<list reference="Session">
+               <property name="Id" reference="Id"/>
+				<property name="SessionID" reference="SessionID"/>
+				<property name="SessionType" reference="SessionType"/>
+				<property name="ClientIP" reference="ClientIP"/>
+				<property name="UserID" reference="UserID"/>
+				<property name="UserName" reference="UserName"/>
+				<property name="UserPrivilege" reference="UserPrivilege"/>
+				<li/>
+            </list>
+        </result>
+	</mapper>
+	<mapper id="importsshkey" help="import SSH key." file="model/import_ssh_key" class="ImportSshKey" method="run">
+		<propertys>
+			<property name="-N" dest="u_name" help="user name" required="False"/>
+			<property name="-F" dest="file_uri" help="ssh key file path" required="True"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="locatedisk" help="locate the physical disk by LED lights." file="model/locate_disk" class="LocateDisk" method="run">
+		<propertys>
+			<property name="-I" dest="disk_id" help="physical disk id" required="True" type="int" />
+			<property name="-S" dest="led_state" help="IndicatorLED state" required="True" choices="on off" />
+			<property name="-L" dest="location" help="physical disk location" required="False" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="syspowerctrl" help="system power control options." file="model/power_control" class="PowerControl" method="run">
+		<propertys>
+			<property name="-T" dest="command_type" help="system power control options" required="True" choices="On GracefulShutdown ForceOff ForceReset ForcePowerCycle"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setbmcdefault" help="set bmc default." file="model/restore_bmc" class="RestoreBmc" method="run">
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setad" help="set ad(Active Directory)." file="model/set_ad" class="SetActiveDirectory" method="run">
+		<propertys>
+			<property name="-E" dest="enable" help="active directory enabled" required="True" choices="Enable Disable" />
+			<property name="-UDN" dest="user_domain_name" help="user domain name" required="False" />
+			<property name="-SU" dest="secret_username" help="secret username, max length 64" required="False" />
+			<property name="-SP" dest="secret_password" help="secret password." required="False" />
+			<property name="-DC1" dest="domain_controller1" help="domain controller1." required="False" />
+			<property name="-DC2" dest="domain_controller2" help="domain controller2." required="False" />
+			<property name="-DC3" dest="domain_controller3" help="domain controller3." required="False" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setbios" help="set bios parameter." file="model/set_bios" class="SetBios" method="run">
+		<propertys>
+			<property name="-A" dest="attribute" help="attribute name" required="True" />
+			<property name="-V" dest="attr_value" help="attribute value" required="True" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setfan" help="set fan speed." file="model/set_fan" class="SetFan" method="run">
+		<propertys>
+			<property name="-M" dest="mode" help="fan speed mode" required="True" choices="Optimal Increased Maximum Custom"/>
+			<property name="-S" dest="gear" help="fan speed" required="False" type="int"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setipv4" help="set IPv4 information of the BMC network port." file="model/set_ip" class="SetIp" method="run">
+		<propertys>
+			<property name="-G" dest="ipv4_gateway" help="gateway IPv4 address of the BMC network port" required="False" />
+			<property name="-N" dest="network_port_id" help="network port" required="True"/>
+			<property name="-M" dest="ipv4_subnet" help="subnet mask of the BMC network port" required="False" />
+			<property name="-T" dest="ipv4_mode" help="how the IPv4 address of the BMC network port is allocated" required="False" choices="Static DHCP"/>
+			<property name="-S" dest="ipv4_enable" help="IPv4 enable" required="False" choices="Enabled Disabled"/>
+			<property name="-IP" dest="ipv4_address" help="IPv4 address of the iBMC network port" required="False"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setipv6" help="set IPv6 information of the BMC network port." file="model/set_ip" class="SetIp" method="run">
+		<propertys>
+			<property name="-G" dest="ipv6_gateway" help="gateway IPv6 address of the BMC network port" required="False" />
+			<property name="-N" dest="network_port_id" help="network port" required="True"/>
+			<property name="-L" dest="ipv6_prefix" help="IPv6 address prefix length of the iBMC network port" required="False" type="int" />
+			<property name="-T" dest="ipv6_mode" help="how the IPv6 address of the BMC network port is allocated" required="False" choices="Static DHCP"/>
+			<property name="-S" dest="ipv6_enable" help="IPv6 enable" required="False" choices="Enabled Disabled"/>
+			<property name="-IP" dest="ipv6_address" help="IPv6 address of the iBMC network port" required="False"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setvlan" help="set VLAN information." file="model/set_ip" class="SetIp" method="run">
+		<propertys>
+			<property name="-N" dest="network_port_id" help="network port" required="True"/>
+			<property name="-I" dest="vlan_id" help="VLAN identifier" required="False" type="int" />
+			<property name="-P" dest="vlan_priority" help="VLAN identifier" required="False" type="int" />
+			<property name="-S" dest="vlan_enable" help="whether VLAN is enabled" required="False" choices="Enabled Disabled"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setldap" help="set ldap." file="model/set_ldap" class="SetLdap" method="run">
+		<propertys>
+			<property name="-BD" dest="bind_dn" help="LDAP administrator user DN, Max length 255." required="False" />
+			<property name="-CNT" dest="common_name_type" help="LDAP server address type.(['ip','fqdn'])" required="False" choices="ip fqdn" />
+			<property name="-E" dest="enable" help="LDAP authentication enabled.(0 for disable 1 for enable)" required="True" choices="0 1" />
+			<property name="-ET" dest="encryption_type" help="Encryption type.(0 for no encryption 1 for SSL authentication type)" required="False" choices="0 1" />
+			<property name="-PW" dest="ldap_password" help="Password for ldap setting." required="False" />
+			<property name="-P" dest="ldap_port" help="The port number." required="False" type="int"/>
+			<property name="-SB" dest="search_base" help="Search base DN" required="False" />
+			<property name="-SA" dest="server_address" help="LDAP Server string (supports IPV4, IPV6, and domain addresses)." required="False" />
+			<property name="-ULA" dest="user_login_attribute" help="User login properties." required="False" choices="uid cn" />
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setloginruleip" help="add ip login rule." file="model/set_login_rule_ip" class="SetLoginRuleIp" method="run">
+		<propertys>
+			<property name="-P" dest="start_time" help="start time, exp: 2020-05-25T12:44" required="False" />
+			<property name="-Q" dest="end_time" help="end time, exp: 2020-05-26T13:00" required="False"/>
+			<property name="-IE" dest="ip_end" help="ip end" required="False"/>
+			<property name="-IS" dest="ip_start" help="login rule enable status" required="True"/>
+			<property name="-E" dest="rule" help="login rule enable status" required="True" choices="Allow Block"/>
+			<property name="-M" dest="mac_address" help="mac address" required="False"/>
+			<property name="-O" dest="operator" help="operator type" required="True" choices="Add Del"/>
+		</propertys>
+		<result>
+		</result>
+	</mapper>
+	<mapper id="setnetmode" help="set net mode." file="model/set_net_mode" class="SetNetMode" method="run">
+		<propertys>
+			<property name="-M" dest="port_mode" help="set net mode." required="True" choices="Normal Bond Adaptive"/>
+        </propertys>
+        <result>
+        </result>
+	</mapper>
+	<mapper id="setntp" help="set ntp information." file="model/set_ntp" class="SetNtp" method="run">
+		<propertys>
+			<property name="-ALT" dest="alternate_ntp_server" help="secondary NTP server" required="False"/>
+			<property name="-PRE" dest="preferred_ntp_server" help="first NTP server" required="False"/>
+			<property name="-S" dest="service_enabled" help="service enable" required="False" choices="Enable Disable"/>
+			<property name="-TN" dest="tertiary_ntp_server" help="tertiary NTP server" required="False"/>
+			<property name="-Z" dest="time_zone" help="time zone" required="False"/>
+		</propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setpdisk" help="set physical disk information." file="model/set_physical_disk" class="SetPDisk" method="run">
+		<propertys>
+			<property name="-CI" dest="controller_id" help="controller id" required="True"/>
+            <property name="-PI" dest="physical_id" help="physical drive id" required="True"/>
+			<property name="-S" dest="status" help="physical status" required="True" choices="Enable Disable JBOD"/>
+        </propertys>
+        <result>
+        </result>
+	</mapper>
+	<mapper id="setpowerlimit" help="set power limit." file="model/set_power_limit" class="SetPowerLimit" method="run">
+		<propertys>
+			<property name="-E" dest="exception" help="power limit exception action" choices="Shutdown NoAction" />
+			<property name="-V" dest="limit_value" help="power limit value" type="int" required="False"/>
+			<property name="-S" dest="status" help="power limit enable" choices="Disable Enable" required="True" />
+		</propertys>
+		<result>
+		</result>
+	</mapper>
+	<mapper id="setpmb" help="set power main/backup." file="model/set_power_redundancy" class="SetPowerRedundancy" method="run">
+		<propertys>
+			<property name="-I" dest="power_id" help="power id" type="int" required="True"/>
+			<property name="-S" dest="power_standby" help="power standby status" choices="Active Standby" required="True" />
+		</propertys>
+		<result>
+		</result>
+	</mapper>
+	<mapper id="setproductinfo" help="set product information." file="model/set_product_info" class="SetAssetTag" method="run">
+		<propertys>
+			<property name="-T" dest="asset_tag" help="asset tag" required="True"/>
+		</propertys>
+		<result>
+		</result>
+	</mapper>
+	<mapper id="setrole" help="set role rivileges." file="model/set_role" class="SetRole" method="run">
+		<propertys>
+			<property name="-R" dest="role_id" help="role id" required="True" choices="CustomRole1 CustomRole2 CustomRole3 CustomRole4 CustomRole5"/>
+			<property name="-P" dest="privileges" help="role privileges, choose a combination from [Kvm, Vmm, SecurityMgmt, ConfigureComponents, PowerControl, Diagnosis, ConfigureSelf]" required="False"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setservice" help="set service configuration." file="model/set_service" class="SetService" method="run">
+		<propertys>
+			<property name="-S" dest="status" help="service status" required="False" choices="Enabled Disabled"/>
+			<property name="-NSP" dest="non_secure_port" help="non secure port" type="int" required="False"/>
+			<property name="-T" dest="service_type" help="service configuration type" required="True" choices="Web KVM CD-Media FD-Media HD-Media SSH Telnet IPMI SNMP VNC Remote_XDP"/>
+			<property name="-SP" dest="secure_port" help="secure port" required="False" type="int"/>
+			<property name="-M" dest="timeout" help="timeout" required="False" type="int"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="setsnmp" help="set snmp information." file="model/set_snmp" class="SetSnmp" method="run">
+		<propertys>
+            <property name="-V1E" dest="snmp_v1_enabled" help="Snmp V1 Enabled" required="False" choices="Enable Disable"/>
+			<property name="-V2CE" dest="snmp_v2c_enabled" help="Snmp V2C Enabled" required="False" choices="Enable Disable"/>
+			<property name="-LPE" dest="long_password_enabled" help="long password enabled" required="False" choices="Enable Disable"/>
+			<property name="-ROC" dest="read_only_community" help="read only community" required="False" />
+			<property name="-RWC" dest="read_write_community" help="read write community" required="False" />
+			<property name="-SE" dest="service_enabled" help="service enable" required="False" choices="Enable Disable"/>
+			<property name="-TM" dest="trap_mode" help="trap mode" required="False" choices="NodeMode EventMode"/>
+			<property name="-TV" dest="trap_version" help="trap version" required="False" choices="v1 v2c v3"/>
+			<property name="-T3U" dest="trap_v3_user" help="trap v3 user" required="False"/>
+			<property name="-CN" dest="community_name" help="community name" required="False"/>
+			<property name="-AS" dest="alarm_severity" help="AlarmSeverity" required="False" choices="Critical MinorAndMajorAndCritical All MajorAndCritical"/>
+			<property name="-TS" dest="trap_servers" help="trap server" required="False" />
+        </propertys>
+		<result>
+        </result>
+	</mapper>
+	<mapper id="setthreshold" help="set predictive failure threshold." file="model/set_threshold" class="SetThreshold" method="run">
+		<propertys>
+			<property name="-F" dest="failure_type" help="Pre-failure type" required="True" choices="reservedblock remainlife prefailcount mediaerror"/>
+			<property name="-T" dest="threshold" help="alarm threshold" required="True" type="int"/>
+			<property name="-S" dest="status" help="enable or disable, enabled by default" required="False" choices="Enable Disable"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="settimezone" help="time zone. for example, UTC+9 and UTC-3." file="model/set_timezone" class="SetTimezone" method="run">
+		<propertys>
+			<property name="-Z" dest="datetime_local_offset" help="timezone" required="True" />
+        </propertys>
+		<result>
+		</result>
+	</mapper>
+	<mapper id="setuser" help="set user." file="model/set_user" class="SetUser" method="run">
+		<propertys>
+			<property name="-EN" dest="enabled" help="enable status" required="False" choices="Enable Disable" />
+			<property name="-N" dest="new_user_name" help="new user name" required="False"/>
+			<property name="-P" dest="new_pwd" help="new user password" required="False"/>
+			<property name="-R" dest="role_id" help="new user role" required="False" choices="Administrator Operator User None"/>
+			<property name="-VME" dest="vmedia_enable" help="virtual media enable status" required="False" choices="Enable Disable"/>
+			<property name="-KVM" dest="kvm_enable" help="kvm enable status" required="False" choices="Enable Disable"/>
+			<property name="-IPMI" dest="ipmi_enable" help="ipmi enable status" required="False" choices="Enable Disable"/>
+			<property name="-WEB" dest="web_enable" help="web enable status" required="False" choices="Enable Disable"/>
+			<property name="-V3" dest="snmp_v3_enable" help="snmpV3 enable status" required="False" choices="Enable Disable"/>
+			<property name="-V3APE" dest="snmp_v3_access_permission" help="SnmpV3 Access Permission" required="False" choices="read_only read_write"/>
+			<property name="-V3APR" dest="snmp_v3_auth_protocol" help="SnmpV3 Auth Protocol" required="False" choices="sha md5"/>
+			<property name="-V3PP" dest="snmp_v3_priv_protocol" help="SnmpV3 PrivProtocol" required="False" choices="des aes"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+	<mapper id="uploadconfig" help="download configuration." file="model/upload_config" class="UploadCfg" method="run">
+		<propertys>
+			<property name="-T" dest="config_type" help="configuration type" required="True" choices="BIOS BMC RAID"/>
+			<property name="-F" dest="file_uri" help="configuration file path" required="True"/>
+        </propertys>
+        <result>
+		</result>
+	</mapper>
+</configuration>
